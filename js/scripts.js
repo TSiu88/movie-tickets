@@ -7,20 +7,41 @@ function Ticket(title, time, age) {
   this.price = 5;
 }
 
-Ticket.prototype.calculatePrice = function(ticket){
-  ticket.title;
-  ticket.time;
-  ticket.age;
+Ticket.prototype.calculatePrice = function(){
+
+  this.calculateTitle();
+  this.calculateTime();
+  this.calculateAge();
+
+  return this.price;
 }
 
-Ticket.prototype.calculateTitle = function(title){
+Ticket.prototype.calculateTitle = function(){
   var newMovies = ["Titanic"];
-  if (newMovies.includes(title)) {
-    return this.price + 5;
+  if (newMovies.includes(this.title)) {
+    return this.price += 5;
+  } else {
+    return this.price;
   }
 }
 
+Ticket.prototype.calculateTime = function(){
+  if (this.time == "2pm") {
+    return this.price -= 2;
+  } else {
+    return this.price;
+  }
+}
 
+Ticket.prototype.calculateAge = function(){
+  if (this.age > 60) {
+    return this.price -= 2;
+  } else {
+    return this.price;
+  }
+}
+
+// User Interface logic
 $(document).ready(function(){
 
   $("#form").submit(function(event){
@@ -30,7 +51,13 @@ $(document).ready(function(){
     var time = $("input:radio[name=movieTimes]:checked").val();
     var age = $("#age").val();
 
-    console.log(title, time, age)
+    var newTicket = new Ticket(title, time, age);
+
+    var finalPrice = newTicket.calculatePrice();
+    console.log("final price", finalPrice);
+    $("#ticketPrice").text("$" + finalPrice);
+
+    
 
   })
 
