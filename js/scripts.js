@@ -54,8 +54,8 @@ $(document).ready(function(){
     var newTicket = new Ticket(title, time, age);
 
     var finalPrice = newTicket.calculatePrice();
-    console.log("final price", finalPrice);
-    $("#ticketPrice").text("$" + finalPrice);
+
+    $("#ticketPrice").text("Final Price: $" + finalPrice);
 
     
 
